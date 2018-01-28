@@ -16,11 +16,12 @@ import matplotlib.pyplot as plt
 import nltk
 import sys
 
-if len(sys.argv) != 2:
-    print "Script must be called with a value for min_dif as only argument"
+if len(sys.argv) != 3 or (sys.argv[2] != "lsi" and sys.argv[2] != "nmf"):
+    print "Script must be called with a value for min_dif as the 1st argument, and either nmf or lsi as the second argument"
     exit()
 
 this_df = int(sys.argv[1])
+reuc = sys.argv[2]
 
 print "This run will use min_df=" + str(this_df)
 
@@ -44,6 +45,7 @@ from sklearn.decomposition import TruncatedSVD
 from sklearn.svm import SVC
 from sklearn.svm import LinearSVC
 from sklearn.decomposition import NMF
+new_reduce = NMF(n_components=50, init='random', random_state=0)
 from sklearn.naive_bayes import MultinomialNB
 pipe = Pipeline([
 #    ('vect', stemCV(min_df=this_df, stop_words='english')),
@@ -79,6 +81,12 @@ def fit_predict_plot_roc(pipe, train_data, train_label, test_data, test_label):
 traindata = vectorizer.fit_transform(trainset.data)
 testdata = vectorizer.transform(testset.data)
 
+
+new_reduce = NMF(n_components=50, init='random', random_state=0)
+if (reuc == "nmf"):
+    pipe.set_params(reduce_dim=new_reduce)
+
+
 print "One against one:"
 fit_predict_plot_roc(pipe, traindata, trainset.target, testdata, testset.target)
 
@@ -90,9 +98,9 @@ fit_predict_plot_roc(pipe, traindata, trainset.target, testdata, testset.target)
 
 
 #do Naive bayes classification
-print "Naive Bayes classifier and NMF decomposition:"
-new_reduce = NMF(n_components=50, init='random', random_state=0)
 new_clf = MultinomialNB()
-pipe.set_params(clf=new_clf, reduce_dim=new_reduce)
-fit_predict_plot_roc(pipe, traindata, trainset.target, testdata, testset.target)
+pipe.set_params(clf=new_clf)
+if (reuc == "nmf"):
+    print "Naive Bayes classifier:"
+    fit_predict_plot_roc(pipe, traindata, trainset.target, testdata, testset.target)
 

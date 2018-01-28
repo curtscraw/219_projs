@@ -16,11 +16,12 @@ import matplotlib.pyplot as plt
 import nltk
 import sys
 
-if len(sys.argv) != 2:
-    print "Script must be called with a value for min_dif as only argument"
+if len(sys.argv) != 3 or (sys.argv[2] != "lsi" and sys.argv[2] != "nmf"):
+    print "Script must be called with a value for min_dif as the 1st argument, and either nmf or lsi as the second argument"
     exit()
 
 this_df = int(sys.argv[1])
+reuc = sys.argv[2]
 
 print "This run will use min_df=" + str(this_df)
 
@@ -80,6 +81,8 @@ def plot_roc(fpr, tpr):
     for label in ax.get_xticklabels()+ax.get_yticklabels():
         label.set_fontsize(15)
 
+    plt.show()
+
     return
 
 def print_stats(test_label, pred_res):
@@ -100,8 +103,8 @@ def fit_predict_plot_roc(pipe, train_data, train_label, test_data, test_label):
     pred_res = pipe.predict(test_data)
     prob_score = pipe.predict_proba(test_data)
     fpr, tpr, _ = roc_curve(test_label, prob_score[:,1])
-    global_roc.append((fpr, tpr))
-#    plot_roc(fpr, tpr)
+#    global_roc.append((fpr, tpr))
+    plot_roc(fpr, tpr)
     print_stats(test_label, pred_res)
     return pipe
 
@@ -121,6 +124,11 @@ pipe = Pipeline([
     ('clf', SVC(kernel='linear', C=1000, probability=True)),
 ])
 
+from sklearn.decomposition import NMF
+new_reduce = NMF(n_components=50, init='random', random_state=0)
+if (reuc == "nmf"):
+    pipe.set_params(reduce_dim=new_reduce)
+
 print "Part E heavy:"
 fit_predict_plot_roc(pipe, trainset, train_target, testset, test_target)
 
@@ -138,39 +146,43 @@ for i in range(-3, 4):      #4 to actually test k=3
     print "Cross validation results for k=" + str(i)
     print_stats(train_target, pred_res)
 
-#part g cannot be done without NNM reduction instead of LSI
-from sklearn.decomposition import NMF
+#part g cannot be done without NNM reduction
 from sklearn.naive_bayes import MultinomialNB
-new_reduce = NMF(n_components=50, init='random', random_state=0)
 new_clf = MultinomialNB()
-pipe.set_params(clf=new_clf, reduce_dim=new_reduce)
-print "Naive Bayes classifier and NMF decomposition:"
-fit_predict_plot_roc(pipe, trainset, train_target, testset, test_target)
+pipe.set_params(clf=new_clf)
+if (reuc == "nmf"):
+    print "Naive Bayes classifier:"
+    fit_predict_plot_roc(pipe, trainset, train_target, testset, test_target)
 
 #part h
 from sklearn.linear_model import LogisticRegression
-new_reduce = TruncatedSVD(n_components=50)
-new_clf = LogisticRegression(penalty='l1')
-pipe.set_params(clf=new_clf, reduce_dim=new_reduce)
-print "Logistic Regression with l2 penalty:"
+new_clf = LogisticRegression(penalty='l2', C=1000)
+pipe.set_params(clf=new_clf)
+print "Logistic Regression with low regularization weight:"
 fit_predict_plot_roc(pipe, trainset, train_target, testset, test_target)
 
 
 #part i
+new_clf = LogisticRegression(penalty='l2')
+pipe.set_params(clf=new_clf)
+print "Logistic Regression with l2 penalty:"
+fit_predict_plot_roc(pipe, trainset, train_target, testset, test_target)
+
 new_clf = LogisticRegression(penalty='l1')
-pipe.set_params(clf=new_clf, reduce_dim=new_reduce)
+pipe.set_params(clf=new_clf)
 print "Logistic Regression with l1 penalty:"
 fit_predict_plot_roc(pipe, trainset, train_target, testset, test_target)
 
-for roc in global_roc:
-    plt.plot(roc[0], roc[1], lw=2)
-
-plt.grid(color='0.7', linestyle='--', linewidth=1)
-
-plt.axis([-0.1, 1.1, 0.0, 1.05])
-#plt.axis([0.0, 0.2, 0.7, 1.05])
-plt.xlabel('False Positive Rate')
-plt.ylabel('True Positive Rate')
-
-plt.legend(['Heavy-margin', 'soft-margin', 'Naive Bayes', 'logistic regression l2', 'logistic regression l1'], loc="lower right")
-plt.show()
+#plot all roc curves at once
+#for roc in global_roc:
+#    plt.plot(roc[0], roc[1], lw=2)
+#
+#plt.grid(color='0.7', linestyle='--', linewidth=1)
+#
+#plt.axis([-0.1, 1.1, 0.0, 1.05])
+##plt.axis([0.0, 0.2, 0.7, 1.05])
+#plt.xlabel('False Positive Rate')
+#plt.ylabel('True Positive Rate')
+#
+#plt.legend(['Heavy-margin', 'soft-margin', 'Naive Bayes', 'logistic regression l2', 'logistic regression l1'], loc="lower right")
+#plt.show()

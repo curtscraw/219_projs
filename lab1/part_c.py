@@ -16,11 +16,13 @@ import matplotlib.pyplot as plt
 import nltk
 import sys
 
-if len(sys.argv) != 2:
-    print "Script must be called with a value for min_dif as only argument"
+if len(sys.argv) != 3 or (sys.argv[2] != "lsi" and sys.argv[2] != "nmf"):
+    print "Script must be called with a value for min_dif as the 1st argument, and either nmf or lsi as the second argument"
     exit()
 
 this_df = int(sys.argv[1])
+reuc = sys.argv[2]
+
 
 print "This run will use min_df=" + str(this_df)
 

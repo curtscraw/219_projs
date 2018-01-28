@@ -1,0 +1,131 @@
+This run will use min_df=2
+Part E heavy:
+Confusion matrix: 
+[[1497   63]
+ [  52 1538]]
+Accuracy:  0.963492063492
+Precision: 0.960649594004
+Recall:    0.967295597484
+-----------------------------------
+
+
+Part E soft:
+Confusion matrix: 
+[[   0 1560]
+ [   0 1590]]
+Accuracy:  0.504761904762
+Precision: 0.504761904762
+Recall:    1.0
+-----------------------------------
+
+
+Cross validation results for k=-3
+Confusion matrix: 
+[[   0 2343]
+ [   0 2389]]
+Accuracy:  0.504860524091
+Precision: 0.504860524091
+Recall:    1.0
+-----------------------------------
+
+
+Cross validation results for k=-2
+Confusion matrix: 
+[[   0 2343]
+ [   0 2389]]
+Accuracy:  0.504860524091
+Precision: 0.504860524091
+Recall:    1.0
+-----------------------------------
+
+
+Cross validation results for k=-1
+Confusion matrix: 
+[[   0 2343]
+ [   0 2389]]
+Accuracy:  0.504860524091
+Precision: 0.504860524091
+Recall:    1.0
+-----------------------------------
+
+
+Cross validation results for k=0
+Confusion matrix: 
+[[2199  144]
+ [  75 2314]]
+Accuracy:  0.953719357566
+Precision: 0.941415785191
+Recall:    0.968606111344
+-----------------------------------
+
+
+Cross validation results for k=1
+Confusion matrix: 
+[[2246   97]
+ [  78 2311]]
+Accuracy:  0.963017751479
+Precision: 0.959717607973
+Recall:    0.967350355797
+-----------------------------------
+
+
+Cross validation results for k=2
+Confusion matrix: 
+[[2263   80]
+ [  68 2321]]
+Accuracy:  0.968723584108
+Precision: 0.966680549771
+Recall:    0.971536207618
+-----------------------------------
+
+
+Cross validation results for k=3
+Confusion matrix: 
+[[2271   72]
+ [  67 2322]]
+Accuracy:  0.970625528318
+Precision: 0.96992481203
+Recall:    0.9719547928
+-----------------------------------
+
+
+Naive Bayes classifier:
+Confusion matrix: 
+[[1368  192]
+ [  27 1563]]
+Accuracy:  0.930476190476
+Precision: 0.890598290598
+Recall:    0.983018867925
+-----------------------------------
+
+
+Logistic Regression with low regularization weight:
+Confusion matrix: 
+[[1491   69]
+ [  48 1542]]
+Accuracy:  0.962857142857
+Precision: 0.957169459963
+Recall:    0.969811320755
+-----------------------------------
+
+
+Logistic Regression with l2 penalty:
+Confusion matrix: 
+[[1443  117]
+ [  56 1534]]
+Accuracy:  0.945079365079
+Precision: 0.929133858268
+Recall:    0.964779874214
+-----------------------------------
+
+
+Logistic Regression with l1 penalty:
+Confusion matrix: 
+[[1482   78]
+ [  51 1539]]
+Accuracy:  0.959047619048
+Precision: 0.951762523191
+Recall:    0.967924528302
+-----------------------------------
+
+
