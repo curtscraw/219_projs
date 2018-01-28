@@ -9,14 +9,26 @@ All installed via Anaconda
 * nltk: version 3.2.4
 
 TO RUN
-To run parts a,b, d with a specific min_df:
-	python parts_a-d.py <min_df_value>
+
+each python script takes 2 arguments: min_df value and lsi or nmf choice for instance:
+
+	python parts_e-i.py 2 nmf
+
+runs parts e-i with nmf dimension reduction and min_df=2
+
+	python parts_e-i.py 5 lsi
+
+
+runs parts e-i with lsi dimension reduction and min_df=5
+
+To run parts a,b, d with a specific min_df and using nmf:
+	python parts_a-d.py <2 or 5> <nmf or lsi>
 
 To run part c:
-	python part_c.py <min_df_value>
+	python part_c.py <2 or 5> <nmf or lsi>
 
 To run parts e-i with a specific min_df:
-	python parts_e-i.py <min_df_value>
+	python parts_e-i.py <2 or 5> <nmf or lsi>
 
 To run part j code with a specific min_df:
-	python part_j.py <min_df_value>
+	python part_j.py <2 or 5> <nmf or lsi>
