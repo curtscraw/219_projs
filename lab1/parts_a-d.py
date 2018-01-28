@@ -16,11 +16,12 @@ import matplotlib.pyplot as plt
 import nltk
 import sys
 
-if len(sys.argv) != 2:
-    print "Script must be called with a value for min_dif as only argument"
+if len(sys.argv) != 3 or (sys.argv[2] != "lsi" and sys.argv[2] != "nmf"):
+    print "Script must be called with a value for min_dif as the 1st argument, and either nmf or lsi as the second argument"
     exit()
 
 this_df = int(sys.argv[1])
+reuc = sys.argv[2]
 
 print "This run will use min_df=" + str(this_df)
 
@@ -86,7 +87,12 @@ print "min_df=" + str(this_df) + " TFxIDF size: " + str(X_tfidf.shape)
 
 #part d, part c is in its own script
 from sklearn.decomposition import TruncatedSVD
+from sklearn.decomposition import NMF
+
 lsi = TruncatedSVD(n_components=50)
+if (reuc == "nmf"):
+    lsi = NMF(n_components=50, init='random', random_state=0)
+
 X_lsi = lsi.fit_transform(X_tfidf)
 testX_lsi = lsi.fit_transform(testX_tfidf)
-print "min_df=" + str(this_df) + " after lsi: " + str(X_lsi.shape)
+print "min_df=" + str(this_df) + " after reduction: " + str(X_lsi.shape)
