@@ -1,0 +1,173 @@
+Relabeling data with either 0 for comp-tech or 1 for rec
+TFxIDF dimensions: (7882, 27768)
+Clustering sparse tfidf with kmeans, k=2
+Contingency: 
+[[ 151 3752]
+ [3870  109]]
+Homogeneity: 0.791324640919
+completeness: 0.79150685559
+V-measure: 0.791415737766
+RAND score: 0.872390054996
+Mutual Info: 0.79130553663
+NMF with r=1
+Contingency: 
+[[1744 2159]
+ [1696 2283]]
+Homogeneity: 0.000311084586659
+completeness: 0.00031474279897
+V-measure: 0.000312903000955
+RAND score: 0.000349910576703
+Mutual Info: 0.000219562406476
+SVD with r=1
+Contingency: 
+[[2160 1743]
+ [2284 1695]]
+Homogeneity: 0.000310977615107
+completeness: 0.000314664424341
+V-measure: 0.000312810156833
+RAND score: 0.000349914958924
+Mutual Info: 0.000219455422027
+NMF with r=2
+Contingency: 
+[[ 731 3172]
+ [3943   36]]
+Homogeneity: 0.592844515412
+completeness: 0.608067163036
+V-measure: 0.600359358773
+RAND score: 0.648591716894
+Mutual Info: 0.592807239875
+SVD with r=2
+Contingency: 
+[[ 250 3653]
+ [3618  361]]
+Homogeneity: 0.608223241581
+completeness: 0.608333021975
+V-measure: 0.608278126825
+RAND score: 0.713926529273
+Mutual Info: 0.608187374307
+NMF with r=3
+Contingency: 
+[[  13 3890]
+ [1674 2305]]
+Homogeneity: 0.237561424862
+completeness: 0.317099662339
+V-measure: 0.271627663619
+RAND score: 0.16950318518
+Mutual Info: 0.237491614778
+SVD with r=3
+Contingency: 
+[[3635  268]
+ [3979    0]]
+Homogeneity: 0.0353596802034
+completeness: 0.165160546781
+V-measure: 0.0582487283625
+RAND score: 0.00593193880668
+Mutual Info: 0.0352712181601
+NMF with r=5
+Contingency: 
+[[2992  911]
+ [1427 2552]]
+Homogeneity: 0.125884883543
+completeness: 0.127229904183
+V-measure: 0.126553820227
+RAND score: 0.165339719484
+Mutual Info: 0.125804857758
+SVD with r=5
+Contingency: 
+[[ 445 3458]
+ [2023 1956]]
+Homogeneity: 0.138545661957
+completeness: 0.154488808534
+V-measure: 0.146083525309
+RAND score: 0.15259281864
+Mutual Info: 0.13846679232
+NMF with r=10
+Contingency: 
+[[1226 2677]
+ [3975    4]]
+Homogeneity: 0.474595160933
+completeness: 0.513066612395
+V-measure: 0.4930816157
+RAND score: 0.473136537245
+Mutual Info: 0.474547058583
+SVD with r=10
+Contingency: 
+[[3900    3]
+ [2388 1591]]
+Homogeneity: 0.231788794819
+completeness: 0.319083600677
+V-measure: 0.268519547729
+RAND score: 0.154588731327
+Mutual Info: 0.23171845505
+NMF with r=20
+Contingency: 
+[[3894    9]
+ [3154  825]]
+Homogeneity: 0.103775132137
+completeness: 0.213011153692
+V-measure: 0.139559454496
+RAND score: 0.0388697375327
+Mutual Info: 0.103693048241
+SVD with r=20
+Contingency: 
+[[   3 3900]
+ [1598 2381]]
+Homogeneity: 0.233028131747
+completeness: 0.320016548166
+V-measure: 0.269681134475
+RAND score: 0.155989148922
+Mutual Info: 0.232957905546
+NMF with r=50
+Contingency: 
+[[   3 3900]
+ [ 530 3449]]
+Homogeneity: 0.0667025153879
+completeness: 0.186835673058
+V-measure: 0.0983079466928
+RAND score: 0.0152959218258
+Mutual Info: 0.0666170072715
+SVD with r=50
+Contingency: 
+[[ 211 3692]
+ [3896   83]]
+Homogeneity: 0.774707930719
+completeness: 0.775648956185
+V-measure: 0.775178157863
+RAND score: 0.856346285004
+Mutual Info: 0.774687305158
+NMF with r=100
+Contingency: 
+[[  13 3890]
+ [  13 3966]]
+Homogeneity: 2.21983210362e-07
+completeness: 6.94847451879e-06
+V-measure: 4.30222097127e-07
+RAND score: -4.45905813813e-07
+Mutual Info: -9.31724050412e-05
+SVD with r=100
+Contingency: 
+[[3900    3]
+ [2310 1669]]
+Homogeneity: 0.245732969386
+completeness: 0.329585259245
+V-measure: 0.281548403613
+RAND score: 0.170550013258
+Mutual Info: 0.245663907331
+NMF with r=300
+Contingency: 
+[[3871   32]
+ [3889   90]]
+Homogeneity: 0.00256529809666
+completeness: 0.0222595262258
+V-measure: 0.00460042089466
+RAND score: -6.92914675877e-05
+Mutual Info: 0.00247362159362
+SVD with r=300
+Contingency: 
+[[  55 3848]
+ [1846 2133]]
+Homogeneity: 0.241189275662
+completeness: 0.302600706133
+V-measure: 0.268427325146
+RAND score: 0.197762294913
+Mutual Info: 0.24111979987
