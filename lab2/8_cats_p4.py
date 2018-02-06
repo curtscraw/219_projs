@@ -39,8 +39,8 @@ tfidf = vectorizer.fit_transform(dataset.data)
 from sklearn.decomposition import NMF
 from sklearn.decomposition import TruncatedSVD
 print "Using r=25 for SVD and r=10 for NMF"
-lsi = TruncatedSVD(n_components=25)
-nmf = NMF(n_components=10)
+lsi = TruncatedSVD(n_components=25, random_state=0)
+nmf = NMF(n_components=10, init='random', random_state=0)
 tfidf = tfidf
 
 #plot the two scatter plots
@@ -91,10 +91,10 @@ cluster_plot(labels, scale(nmf.fit_transform(tfidf)), "", "", "NMF with unit var
 
 log_tf = FunctionTransformer(func=np.log, inverse_func=np.exp)
 print "NMF with non-linear (log) transform"
-cluster_plot(labels, log_tf.fit_transform(nmf.fit_transform(tfidf) + 1), "", "", "NMF with logarithm transform visualization")
+cluster_plot(labels, log_tf.fit_transform(nmf.fit_transform(tfidf) + 0.01), "", "", "NMF with logarithm transform visualization")
 
 print "NMF with scale then log transform"
 cluster_plot(labels, log_tf.fit_transform(scale(nmf.fit_transform(tfidf)) + 1), "", "", "NMF with unit variance then logarithm transform visualization")
 
 print "NMF with log transform then scale"
-cluster_plot(labels, log_tf.fit_transform(scale(nmf.fit_transform(tfidf)) + 1), "", "", "NMF with logarithm transform then unit variance visualization")
+cluster_plot(labels, scale(log_tf.fit_transform(nmf.fit_transform(tfidf) + 0.01)), "", "", "NMF with logarithm transform then unit variance visualization")
