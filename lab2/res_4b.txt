@@ -1,0 +1,45 @@
+NMF with unit variance
+Contingency: 
+[[2974  929]
+ [3977    2]]
+Homogeneity: 0.128735965484
+completeness: 0.245698213159
+V-measure: 0.168949302669
+RAND score: 0.0598565690525
+Mutual Info: 0.128656172631
+NMF with non-linear (log) transform
+Contingency: 
+[[2254 1649]
+ [3976    3]]
+Homogeneity: 0.24965922118
+completeness: 0.33703536643
+V-measure: 0.286840849976
+RAND score: 0.182493238562
+Mutual Info: 0.249590518389
+NMF with scale then log transform
+Contingency: 
+[[1338 2565]
+ [1410 2569]]
+Homogeneity: 0.000105891525345
+completeness: 0.000113506398064
+V-measure: 0.000109566813037
+RAND score: -4.93455181468e-05
+Mutual Info: 1.43485960486e-05
+NMF with log transform then scale
+Contingency: 
+[[2532 1371]
+ [2509 1470]]
+Homogeneity: 0.000258342444554
+completeness: 0.000273925426964
+V-measure: 0.000265905827551
+RAND score: 0.000115357875146
+Mutual Info: 0.000166813853615
+SVD with unit variance
+Contingency: 
+[[1399 2504]
+ [1361 2618]]
+Homogeneity: 0.000213058384998
+completeness: 0.000228046043778
+V-measure: 0.000220297592239
+RAND score: 0.000248089489432
+Mutual Info: 0.000121525318688#

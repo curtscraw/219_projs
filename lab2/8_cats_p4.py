@@ -45,15 +45,30 @@ tfidf = tfidf
 
 #plot the two scatter plots
 from sklearn.cluster import KMeans
+from sklearn.metrics.cluster import homogeneity_score,completeness_score,v_measure_score
+from sklearn.metrics.cluster import adjusted_rand_score,adjusted_mutual_info_score
+from sklearn.metrics import confusion_matrix
+
+def print_scores(labels, predicted):
+    print "Contingency: "
+    print str(confusion_matrix(labels, predicted))
+    print "Homogeneity: " + str(homogeneity_score(labels, predicted))
+    print "completeness: " + str(completeness_score(labels, predicted))
+    print "V-measure: " + str(v_measure_score(labels, predicted))
+    print "RAND score: " + str(adjusted_rand_score(labels, predicted))
+    print "Mutual Info: " + str(adjusted_mutual_info_score(labels, predicted))
+
 def cluster_plot(labels, data, xax, yax, title):
     km = KMeans(n_clusters=2, init='k-means++', max_iter=100, n_init=1)
     km.fit(data)
     pred = km.predict(data)
     centers = km.cluster_centers_
 
+    print_scores(labels, km.labels_)
+
     #plot it
     plt.scatter(data[:,0], data[:,1], c=pred, cmap='viridis')
-    plt.scatter(centers[:,0], centers[:,1], c='red', s=50, alpha=0.5)   #bigger, but 50% transparent
+    plt.scatter(centers[:,0], centers[:,1], c='red', s=50, alpha=0.5, marker="x")   #bigger, but 50% transparent
     plt.xlabel(xax)
     plt.ylabel(yax)
     plt.title(title)
@@ -65,3 +80,21 @@ def cluster_plot(labels, data, xax, yax, title):
 
 cluster_plot(labels, lsi.fit_transform(tfidf), "", "", "SVD Visualization")
 cluster_plot(labels, nmf.fit_transform(tfidf), "", "", "NMF Visualization")
+
+#part 4b
+from sklearn.preprocessing import scale, FunctionTransformer
+print "SVD with unit variance"
+cluster_plot(labels, scale(lsi.fit_transform(tfidf)), "", "", "SVD with unit variance visualization")
+print "NMF with unit variance"
+cluster_plot(labels, scale(nmf.fit_transform(tfidf)), "", "", "NMF with unit variance visualization")
+
+
+log_tf = FunctionTransformer(func=np.log, inverse_func=np.exp)
+print "NMF with non-linear (log) transform"
+cluster_plot(labels, log_tf.fit_transform(nmf.fit_transform(tfidf) + 1), "", "", "NMF with logarithm transform visualization")
+
+print "NMF with scale then log transform"
+cluster_plot(labels, log_tf.fit_transform(scale(nmf.fit_transform(tfidf)) + 1), "", "", "NMF with unit variance then logarithm transform visualization")
+
+print "NMF with log transform then scale"
+cluster_plot(labels, log_tf.fit_transform(scale(nmf.fit_transform(tfidf)) + 1), "", "", "NMF with logarithm transform then unit variance visualization")
