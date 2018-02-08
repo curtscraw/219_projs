@@ -13,11 +13,6 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import sys
 
-if len(sys.argv) < 2:
-    print "This script must be called with an r-value for reduction, for instance:"
-    print "python 20_cats.py <r value>"
-
-rval = int(sys.argv[1])
 #setup, fetch datasets
 this_df = 3
 
@@ -31,8 +26,6 @@ print "TFxIDF dimensions: " + str(tfidf.shape)
 #reduce dimensionality
 from sklearn.decomposition import NMF
 from sklearn.decomposition import TruncatedSVD
-lsi = TruncatedSVD(n_components=rval, random_state=0)
-nmf = NMF(n_components=rval, init='random', random_state=0)
 
 #cluster
 from sklearn.cluster import KMeans
@@ -47,16 +40,34 @@ def print_scores(labels, predicted):
     print "V-measure: " + str(v_measure_score(labels, predicted))
     print "RAND score: " + str(adjusted_rand_score(labels, predicted))
     print "Mutual Info: " + str(adjusted_mutual_info_score(labels, predicted))
+    return homogeneity_score(labels, predicted)
+    
     
 #returns [homogeneity, completeness, v_measure, rand, mutualr_info] for plotting 
 def km_score(labels, data):
     km = KMeans(n_clusters=2, init='k-means++', max_iter=100, n_init=1)
     km.fit(data)
-    print_scores(labels, km.labels_)
+    return print_scores(labels, km.labels_)
 
-print "With r=" + str(rval) + ":"
-print "SVD:"
-km_score(dataset.target, lsi.fit_transform(tfidf))
-print "NMF:"
-km_score(dataset.target, nmf.fit_transform(tfidf))
+lsi_vals = []
+nmf_vals = []
+rvals = [1, 2, 3, 4, 5, 7, 10, 12, 15, 20, 25, 30, 35, 40, 50, 100, 200]
+print "This may take some time, be patient"
+for rval in rvals:
+    lsi = TruncatedSVD(n_components=rval, random_state=0)
+    nmf = NMF(n_components=rval, init='random', random_state=0)
+    print "With r=" + str(rval) + ":"
+    print "SVD:"
+    lsi_vals.append(km_score(dataset.target, lsi.fit_transform(tfidf)))
+    print "NMF:"
+    nmf_vals.append(km_score(dataset.target, nmf.fit_transform(tfidf)))
+
+print "Plotting graph of homogeneity with relation to r value"
+plt.plot(rvals, lsi_vals, label="SVD")
+plt.plot(rvals, nmf_vals, label="NMF")
+plt.xlabel('r value')
+plt.ylabel('Homogeneity Score')
+plt.title('Homogeneity Score relative to r value')
+plt.legend(loc="lower right")
+plt.show()
 

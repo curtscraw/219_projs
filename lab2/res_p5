@@ -1,0 +1,17 @@
+For 20 clusters, and 20 categories, the best r value:
+
+Based on homogeneity:
+	NMF: 3
+	SVD: 50
+Based on completeness:
+	NMF: 12
+	SVD: 30
+Bsed on V-measure:
+	NMF: 2
+	SVD: 50
+Based on RAND:
+	NMF: 2
+	SVD: 50
+Based on Mutual info:	
+	NMF: 3
+	SVD: 50
