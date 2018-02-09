@@ -1,17 +1,32 @@
 For 20 clusters, and 20 categories, the best r value:
 
 Based on homogeneity:
-	NMF: 3
-	SVD: 50
+	NMF: 10
+	SVD: 10
 Based on completeness:
-	NMF: 12
-	SVD: 30
+	NMF: 35
+	SVD: 125
 Bsed on V-measure:
-	NMF: 2
-	SVD: 50
+	NMF: 35
+	SVD: 80
 Based on RAND:
-	NMF: 2
-	SVD: 50
+	NMF: 10
+	SVD: 10
 Based on Mutual info:	
-	NMF: 3
-	SVD: 50
+	NMF: 10
+	SVD: 10
+
+SO used r=35 for NMF, and r=80 for SVD
+
+
+Effects of Scaling and Log transform:
+
+	SVD:	*scaling worsened results for r=80
+	
+	NMF:	*scaling worsened results
+		*Log improved results
+		*log then scale improved results the most!
+		*scale then log worsened results, but not as bad as just scaling	
+
+
+
