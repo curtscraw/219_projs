@@ -73,7 +73,9 @@ We have used Latent Semantic Indexing (LSI) and Non-negative Matrix Factorizatio
 We determined the effective dimension of the data through inspection of the top singular values of the TF\--IDF matrix and noticed how many of them are significant in reconstructing the matrix with the truncated SVD representation. We checked what ratio of the variance of the original data is retained after dimensionality reduction. Figure \ref{fig:variance_r} shows the plot of the percent of variance the top r principle components can retain vs. r, for r = 1 to 1000.
 
 \begin{figure}
+  \centering
   \includegraphics[width=\linewidth]{p3_variance_r.png}
+  \vspace*{-20mm}
   \caption{Plot of the Percent of variance retained in PCA vs. r.}
   \label{fig:variance_r}
 \end{figure}
@@ -556,7 +558,24 @@ Mutual Info: 		& 0.24111979987 \\
 \end{center}
 
 
+\section*{Performance Visualization & Improvement}
 
+\begin{figure}
+  \includegraphics[width=\linewidth]{svd_clusters_4a.png}
+	\vspace*{-20mm}  
+ 
+  \caption{Clustering result for SVD with the best r-value}
+   \label{fig:svd1}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{nmf_clusters_4a.png} 
+  \vspace*{-20mm}
+  \caption{Clustering result for NMF with the best r-value}
+  \label{fig:nmf1}
+\end{figure}
+
+By projecting final data vectors onto 2-dimensional plane and color-coding the classes, the best clustering results from previous part for both SVD and NMF have been visualized in \ref[fig:svd1} and \ref{fig:nmf1} figures. 
 
 
 
