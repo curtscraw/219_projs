@@ -579,6 +579,184 @@ By projecting final data vectors onto 2-dimensional plane and color-coding the c
 
 
 
+In effort to improve the performance of the clustering, we used three types of transformation techniques: unit variance of all features, logartihmic trnasformation as a non-linear transformation, and the combination of them. The clustering results after these transformations applied have been illustrated in \ref{fig: nmf2} through \ref{fig:nmf5}.  
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{nmf_unitvar_4b.png} 
+  \vspace*{-20mm}
+  \caption{Clustering result for NMF with unit variance features}
+  \label{fig:nmf2}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{svd_unitvar_4b.png} 
+  \vspace*{-20mm}
+  \caption{Clustering result for SVD with unit variance features}
+  \label{fig:svd2}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{nmf_log_4b.png} 
+  \vspace*{-20mm}
+  \caption{Clustering result for NMF with logartihmic transformation}
+  \label{fig:nmf3}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{nmf_log-scalse_4b.png} 
+  \vspace*{-20mm}
+  \caption{Clustering result for NMF with logarithmic transformation followed by unit variance}
+  \label{fig:nmf4}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{nmf_scale-log_p4.png} 
+  \vspace*{-20mm}
+  \caption{Clustering result for NMF with uni variance followed by logarithmic trnasformation}
+  \label{fig:nmf5}
+\end{figure}
+
+
+Morevoer, the results from all the performance metrics for the clustering with after transformations have been reported below. All these clearly show the improvement in the performance of the clustering. \\ \\
+
+
+
+\textbf{SVD with unit variance} \\
+Contingency: \[
+\begin{bmatrix}
+1392 		& 2511 \\
+1399 		& 2580 \\
+\end{bmatrix}
+\]
+\\ \\
+
+\begin{center}
+\begin{tabu}{| c | c |}
+\hline
+Homogeneity: 		& 2.01303068525e-05 \\
+\hline
+Completeness: 		& 2.14668865991e-05 \\
+\hline
+V-measure: 			& 2.07771235773e-05 \\
+\hline
+RAND score: 		& -6.21221803205e-05 \\
+\hline
+Mutual Info: 		& -7.14202926019e-05 \\
+\hline
+\end{tabu}
+\end{center}
+
+
+\textbf{NMF with unit variance} \\
+
+Contingency:\[ 
+\begin{bmatrix}
+692 		& 3211 \\
+3873  		& 106 \\
+\end{bmatrix}
+\]
+\\ \\
+
+\begin{center}
+\begin{tabu}{| c | c |}
+\hline
+Homogeneity: 		& 0.558580439281 \\
+\hline
+Completeness: 		& 0.568874068887 \\
+\hline
+V-measure: 			& 0.563680263802 \\
+\hline
+RAND score: 		& 0.635981622287 \\
+\hline
+Mutual Info: 		& 0.558540026933 \\
+\hline
+\end{tabu}
+\end{center}
+
+
+
+\textbf{NMF with non-linear (log) transform} \\
+
+Contingency: \[ 
+\begin{bmatrix}
+3597  		& 306 \\
+77 			& 3902 \\
+\end{bmatrix}
+\]
+\\
+
+\begin{center}
+\begin{tabu}{| c | c |}
+\hline
+Homogeneity: 		& 0.730830451039 \\
+\hline
+Completeness: 		& 0.733210930879 \\
+\hline
+V-measure: 			& 0.732018755671 \\
+\hline
+RAND score: 		& 0.815054275835 \\
+\hline
+Mutual Info: 		& 0.730805808463 \\
+\hline
+\end{tabu}
+\end{center}
+
+
+\textbf{NMF with scale then log transform} \\
+
+Contingency:\[
+\begin{bmatrix}
+1864 		& 2039\\
+1760 		& 2219 \\
+\end{bmatrix}
+\]
+\\
+
+\begin{center}
+\begin{tabu}{| c | c |}
+\hline
+Homogeneity: 		& 0.000902761815731 \\
+\hline
+Completeness: 		& 0.00090693865041 \\
+\hline
+V-measure: 			& 0.00090484541295  \\
+\hline
+RAND score: 		& 0.00117175851602  \\
+\hline
+Mutual Info: 		& 0.000811294034297  \\
+\hline
+\end{tabu}
+\end{center}
+
+
+\textbf{NMF with log transform then scale}\\
+
+Contingency:\[ 
+\begin{bmatrix}
+289 		& 3614 \\
+3895   		& 84 	\\
+\end{bmatrix}
+\]
+
+\begin{center}
+\begin{tabu}{| c | c |}
+\hline
+Homogeneity: 		& 0.73419145919 \\
+\hline
+Completeness:	 	& 0.73616241497 \\
+\hline
+V-measure: 			& 0.735175616083 \\
+\hline
+RAND score: 		& 0.819642953267 \\
+\hline
+Mutual Info: 		& 0.734167124321 \\
+\hline 
+\end{tabu}
+\end{center}
+
+
+
+
 
 
 \end{document}
