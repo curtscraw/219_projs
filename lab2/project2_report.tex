@@ -2,7 +2,7 @@
 \usepackage{fullpage}
 \usepackage{graphicx}
 \usepackage{subfigure}
-\usepackage[font=small,skip=1pt]{caption}
+%\usepackage[font=small,skip=0pt]{caption}
 \usepackage{booktabs}
 \usepackage{amsmath}
 
@@ -32,7 +32,7 @@ For this project, we have used "20 Newsgroups" dataset which is a collection of 
 
 
 
-\section*{Wroking Procedures \& Results}
+\section*{Working Procedures \& Results}
 
 \subsection*{Data Representation}
 In order to find a good representation of the data, the documents were transformed into TF\--IDF vectors using min\_df = 3.
@@ -46,7 +46,7 @@ Then we applied K-means clustering with k = 2 to determine the groups or classes
 In addition to this, we examined several measures to make a concrete comparison of the clustering results. Results from different measures are reported in the following table: 
 
 \begin{center}
-	\textbf{Performance metrics' scores for clustering}	
+	\textbf{Performance metrics' scores for clustering}	\\ \vspace{10pt}
 	\begin{tabular}{*{2}{c}}
 		\toprule
 		\textbf{Measure} & \textbf{Score}  \\
