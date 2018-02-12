@@ -1,8 +1,11 @@
-\documentclass{report}
+\documentclass{article}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{blindtext}
+\usepackage[utf8]{inputenc}
 \usepackage{fullpage}
 \usepackage{graphicx}
+\usepackage[font=small,skip=0pt]{caption}
 \usepackage{subfigure}
-%\usepackage[font=small,skip=0pt]{caption}
 \usepackage{booktabs}
 \usepackage{amsmath}
 
@@ -13,36 +16,33 @@
 
 
 \author{Abdullah-Al-Zubaer Imran\\Curtis Crawford}
-\title{University of California, Los Angeles \\
-		{\large EE219: \textbf{Classification} \\ Project Report} }  
+\title{EE219: Project Report \\ Project: Classification}  
 \date{}
-
-
 
 
 
 \begin{document}
 \maketitle
 
-\section*{Introduction}
-Clustering alogrithms find groups of data points that have similar representations in a proper space, in unsupervised way. Clustering differs from classification in that without having any prior labelling of the data points. K-means clustering is a clustering technique that interatively groups data points into regions characterized by a set of cluster centroids. Data representation is very crucial for any clustering algorithm like K-means. In this project, we have figured out proper representations of the data points so that we can get efficient and reasonable results from the clustering. Then we performed K-means clutering on the dataset and evaluated performance using different performance measures. Moreover, different preprocess techniques were performed for possible increase in performance of the clusering. 
+\section{Introduction}
+Clustering alogrithms find groups of data points that have similar representations in a proper space, in unsupervised way. Clustering differs from classification in that without having any prior labelling of the data points. K-means clustering is a clustering technique that interatively groups data points into regions characterized by a set of cluster centroids. Data representation is very crucial for any clustering algorithm like K-means. In this project, we have figured out proper representations of the data points so that we can get efficient and reasonable results from the clustering. Then we performed K-means clutering on the dataset and evaluated performance using different performance measures. Moreover, different preprocess techniques were performed for possible increase in performance of the clusering. \\
 
-\section*{Dataset}
-For this project, we have used "20 Newsgroups" dataset which is a collection of approximately 20,000 documents, partitioned evenly across 20 different newsgroups, each corresponding to a different topic. And each topic is viewed as a class. Since we performed clustering on this dataset, we pretended that the class labels are not available in the dataset. 
+\section{Dataset}
+For this project, we have used "20 Newsgroups" dataset which is a collection of approximately 20,000 documents, partitioned evenly across 20 different newsgroups, each corresponding to a different topic. And each topic is viewed as a class. Since we performed clustering on this dataset, we pretended that the class labels are not available in the dataset. \\ 
 
 
 
-\section*{Working Procedures \& Results}
+\section{Working Procedures \& Results}
 
-\subsection*{Data Representation}
+\subsection{Data Representation}
 In order to find a good representation of the data, the documents were transformed into TF\--IDF vectors using min\_df = 3.
-The Tf\--IDF matrix dimension: (7882, 27768)   \\
+The Tf\--IDF matrix dimension: (7882, 27768) 
 
-\subsection*{Clustering}
-Then we applied K-means clustering with k = 2 to determine the groups or classes the data points belong to, without providing any prior label. For evaluation purpose, we re-labeled data with either 0 for comp-tech or 1 for rec. And compared the clustering results with the known labels. \\ 
+\subsection{Clustering}
+Then we applied K-means clustering with k = 2 to determine the groups or classes the data points belong to, without providing any prior label. For evaluation purpose, we re-labeled data with either 0 for comp-tech or 1 for rec. And compared the clustering results with the known labels. 
 
 
-\subsubsection*{Performance Measures}
+\subsubsection{Performance Measures}
 In addition to this, we examined several measures to make a concrete comparison of the clustering results. Results from different measures are reported in the following table: 
 
 \begin{center}
@@ -70,33 +70,32 @@ In addition to this, we examined several measures to make a concrete comparison 
 					$
 \end{center}    
 
-\\  \vspace{20pt}
+\\ \vspace{20pt}
 
-
-
-\subsection*{Data Preprocessing}
-As we observe from the clustering result, TF\--IDF vector did not yield a good result for K-means clustering. Therefore, we tried with better representations of the data. We performed two dimensionality reduction techniques as the preprocess for K-means clustering. \\ \vspace{10pt}
-
+\subsection{Data Preprocessing}
+As we observe from the clustering result, TF\--IDF vector did not yield a good result for K-means clustering. Therefore, we tried with better representations of the data. We performed two dimensionality reduction techniques as the preprocess for K-means clustering.
 
 \subsubsection{Dimensionality Reduction}
-We have used Latent Semantic Indexing (LSI) and Non-negative Matrix Factorization (NMF) for dimensionality reduction. 
-We determined the effective dimension of the data through inspection of the top singular values of the TF\--IDF matrix and noticed how many of them are significant in reconstructing the matrix with the truncated SVD representation. We checked what ratio of the variance of the original data is retained after dimensionality reduction. Figure \ref{fig:variance_r} shows the plot of the percent of variance the top r principle components can retain vs. r, for r = 1 to 1000.
+We have used Latent Semantic Indexing (LSI) and Non-negative Matrix Factorization (NMF) for dimensionality reduction. We determined the effective dimension of the data through inspection of the top singular values of the TF\--IDF matrix and noticed how many of them are significant in reconstructing the matrix with the truncated SVD representation. We checked what ratio of the variance of the original data is retained after dimensionality reduction. Figure \ref{fig:variance_r} shows the plot of the percent of variance the top r principle components can retain vs. r, for r = 1 to 1000.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{p3_variance_r.png}
-  \vspace*{-20mm}
-  \caption{Plot of the Percent of variance retained in PCA vs. r.}
-  \label{fig:variance_r}
+
+\begin{figure}[!ht]
+  	\centering
+  	\includegraphics[width=90mm]{p3_variance_r.png}
+  	\vspace*{-3mm}
+  	\caption{Plot of the Percent of variance retained in PCA vs. r.}
+  	\label{fig:variance_r}
 \end{figure}
 
+
 For dimensionality reduction, we used LSI and NMF methods. We swept over the parameters for each method (LSI and NMF) to determine the one yielding better results in terms of clustering metrics. All five performance metrics for clustering with different r-values are reported below. \\
+\newpage
 
 
 \underline{\textbf{NMF with r = 1}} 
 
 \begin{center}
-	\textbf{Performance metrics's scores for the clustering} \\ \vspace{10pt}
+	\textbf{Performance metrics's scores} \\ \vspace{10pt}
 	\begin{tabular}{*{2}{c}}
 		\toprule
 		\textbf{Measure} & \textbf{Score} \\
@@ -386,7 +385,7 @@ For dimensionality reduction, we used LSI and NMF methods. We swept over the par
 \underline{\textbf{NMF with r = 20}} 
 
 \begin{center}
-	\textbf{} \\ \vspace{10pt}
+	\textbf{Performance metrics's scores} \\ \vspace{10pt}
 	\begin{tabular}{*{2}{c}} 
 		\toprule
 		\textbf{Measure} & \textbf{Score} \\	
@@ -609,67 +608,85 @@ For dimensionality reduction, we used LSI and NMF methods. We swept over the par
 \end{center}
 \\ \vspace{20pt}
 
+Performance measures for the clustering with different r-values have been visualized in Figure \ref{fig:performance_measures}. As we can observe non-monotonocity in case of all the measures as r increases. Based on the scores from the measures, the performance of clustering does not seem to be improving or decaying consistently with the increase of r. \\ 
+
+\begin{figure}[!ht]%
+	\centering
+		\subfigure[Homogeneity]{%
+			\includegraphics[width=60mm]{homogeneity.png}}%
+		\qquad
+		\subfigure[Completeness]{%
+			\includegraphics[width=60mm]{completeness.png}}%
+		\qquad
+		\subfigure[V-measure]{%
+			\includegraphics[width=60mm]{v-measure.png}}%		
+		\qquad
+		\subfigure[RAND score]{%
+			\includegraphics[width=60mm]{rang_score.png}}%
+		\qquad
+		\subfigure[Mutual Info]{%
+			\includegraphics[width=60mm]{mutual_info.png}}%
+		\vspace*{-3mm}
+	\caption{Performance measures for the clustering using NMF and SVD with different r-values}
+	\label{fig:performance_measures}
+\end{figure}
+
+\\ 
 
 
-\section*{Performance Visualization \& Improvement}
+\section{Performance Visualization \& Improvement}
 
-\begin{figure}%
-\centering
-\subfigure[NMF]{%
-\label{fig:nmf1}%
-\includegraphics[height=2in]{nmf_clusters_4a.png}}%
-\qquad
-\subfigure[SVD]{%
-\label{fig:svd1}%
-\includegraphics[height=2in]{svd_clusters_4a.png}}%
-\vspace*{-3mm}
-\caption{Best clustering results for NMF and SVD with color-coded classes}
+By projecting final data vectors onto 2-dimensional plane and color-coding the classes, the best clustering results from previous part for both SVD and NMF have been visualized in Figure \ref{fig:nmf_svd1}. \\
+In effort to improve the performance of the clustering, we used three types of transformation techniques: unit variance of all features, logartihmic trnasformation as a non-linear transformation, and the combination of them. The clustering results after these transformations applied have been illustrated in Figure \ref{fig:nmf_svd2} and Figure \ref{fig:nmf_transform}.  
+
+
+
+
+\begin{figure}[!ht]%
+	\centering
+		\subfigure[NMF]{%
+			\includegraphics[width=70mm]{nmf_clusters_4a.png}}%
+		\qquad
+		\subfigure[SVD]{%
+			\includegraphics[width=70mm]{svd_clusters_4a.png}}%
+		\vspace*{-3mm}
+	\caption{Best clustering results for NMF and SVD with color-coded classes}
+	\label{fig:nmf_svd1}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure}
-  \includegraphics[width=\linewidth]{nmf_unitvar_4b.png} 
-  \vspace*{-20mm}
-  \caption{Clustering result for NMF with unit variance features}
-  \label{fig:nmf2}
+\begin{figure}[!ht]%
+	\centering
+		\subfigure[NMF]{%
+			\includegraphics[width=70mm]{nmf_unitvar_4b.png}}%
+		\qquad
+		\subfigure[SVD]{%
+			\includegraphics[width=70mm]{svd_unitvar_4b.png}}%
+		\vspace*{-3mm}
+	\caption{Clustering results for NMF and SVD with unit variance features}
+	\label{fig:nmf_svd2}
 \end{figure}
+\newpage
 
-\begin{figure}
-  \includegraphics[width=\linewidth]{svd_unitvar_4b.png} 
-  \vspace*{-20mm}
-  \caption{Clustering result for SVD with unit variance features}
-  \label{fig:svd2}
+\begin{figure}[!ht]%
+	\centering
+		\subfigure[NMF with log transformation]{%
+			\includegraphics[width=50mm]{nmf_log_4b.png}}%
+		\qquad		
+		\subfigure[NMF with log then scale]{%
+			\includegraphics[width=50mm]{nmf_log-scalse_4b.png}}%
+		\qquad		
+		\subfigure[NMF with scale then log]{%
+			\includegraphics[width=50mm]{nmf_scale-log_p4.png}}%
+		
+		\vspace*{-3mm}
+	\caption{Clustering results for NMF with logarithmic, log-scale, and scale-log transformations}
+	\label{fig:nmf_transform}
 \end{figure}
-
-\begin{figure}
-  \includegraphics[width=\linewidth]{nmf_log_4b.png} 
-  \vspace*{-20mm}
-  \caption{Clustering result for NMF with logartihmic transformation}
-  \label{fig:nmf3}
-\end{figure}
-
-\begin{figure}
-  \includegraphics[width=\linewidth]{nmf_log-scalse_4b.png} 
-  \vspace*{-20mm}
-  \caption{Clustering result for NMF with logarithmic transformation followed by unit variance}
-  \label{fig:nmf4}
-\end{figure}
-
-\begin{figure}
-  \includegraphics[width=\linewidth]{nmf_scale-log_p4.png} 
-  \vspace*{-20mm}
-  \caption{Clustering result for NMF with uni variance followed by logarithmic trnasformation}
-  \label{fig:nmf5}
-\end{figure}
+\\  \vspace{20pt}
 
 
-By projecting final data vectors onto 2-dimensional plane and color-coding the classes, the best clustering results from previous part for both SVD and NMF have %been visualized in \ref[fig:svd1} and \ref{fig:nmf1} figures. \\
-
-In effort to improve the performance of the clustering, we used three types of transformation techniques: unit variance of all features, logartihmic trnasformation as a non-linear transformation, and the combination of them. The clustering results after these transformations applied have been illustrated in %\ref{fig: nmf2} through \ref{fig:nmf5}.  Morevoer, the results from all the performance metrics for the clustering with after transformations have been reported below. All these clearly show the improvement in the performance of the clustering. \\ \\
-
-
+Morevoer, the results from all the performance metrics for the clustering with after transformations have been reported below. All these clearly show the improvement in the performance of the clustering. \\ 
 
 \underline{\textbf{SVD with unit variance}} 
 
@@ -698,7 +715,7 @@ In effort to improve the performance of the clustering, we used three types of t
 		$
 \end{center}
 
-\\ \vspace{20pt}
+\newpage
 
 \underline{\textbf{NMF with unit variance}} 
 
@@ -726,7 +743,8 @@ In effort to improve the performance of the clustering, we used three types of t
 			\end{array}\right]
 		$
 \end{center}
-\newpage
+
+\\ \vspace{20pt}
 
 
 \underline{\textbf{NMF with non-linear (log) transform}} 
@@ -755,7 +773,8 @@ In effort to improve the performance of the clustering, we used three types of t
 				\end{array}\right]
 			$
 \end{center}
-\\ \vspace{20pt}
+
+\newpage
 
 
 \underline{\textbf{NMF with scale then log transform}} 
@@ -785,7 +804,7 @@ In effort to improve the performance of the clustering, we used three types of t
 			$
 \end{center}
 
-\newpage
+\\ \vspace{20pt}
 
 \underline{\textbf{NMF with log transform then scale}}
 
@@ -813,16 +832,15 @@ In effort to improve the performance of the clustering, we used three types of t
 		    \end{array}\right]
     $
 \end{center}
+
 \\ \vspace{20pt}
+Logarithmic transformation may increase the cluserting results because it gives some important insights useful for the clustering. The log transformation works as a filter for PCA. It filters off some dominant trivial effects dominant for PCA, eventually improving the clustering results. \\ 
 
 
-\section*{Expansion of Dataset into 20 Categories}
+\section{Expansion of Dataset into 20 Categories}
 In order to examine how purely we can retrieve all 20 original sub-class labels with clustering, we included all documents and the correspodning terms in the data matrix and figured out proper representation through diemsionality reduction of the TF-IDF representation.
 
-Using the same parameters as in part 1, we tried different dimensions for both truncated SVD and NMF dimensionality reduction. Based on the performance metrics, the best r-values for 20 clusters and 20 sub-classes were found to be as in the following. \\
-
-For 20 clusters, and 20 categories, the best r values have been reported in the table given below. \\
-
+Using the same parameters as in part 1, we tried different dimensions for both truncated SVD and NMF dimensionality reduction. Based on the performance metrics, the best r-values for 20 clusters and 20 sub-classes were found. For 20 clusters, and 20 categories, the best r values have been reported in the table given below. \\
 
 \begin{center}
 	\textbf{Best r-values for different performance metrics} \\ \vspace{10pt}
@@ -842,7 +860,23 @@ For 20 clusters, and 20 categories, the best r values have been reported in the 
 		\bottomrule
 	\end{tabular}
 \end{center}
+
 \\ \vspace{20pt}
+
+Clustering results for both NMF and SVD with logarithmic transformation followed by unit variance have been visualized in Figure \ref{fig:nmf_svd3}. \\
+
+\begin{figure}[!ht]%
+	\centering
+		\subfigure[SVD]{%
+			\includegraphics[width=70mm]{p5_svd_clustering.png}}%
+		\qquad
+		\subfigure[NMF]{%
+			\includegraphics[width=70mm]{p5_nmf_clustering.png}}%
+		\vspace*{-3mm}
+	\caption{Clustering results for NMF and SVD with logarithmic transformation followed by unit variance}
+	\label{fig:nmf_svd3}
+\end{figure}
+\newpage
 
 After trying with different r-values, we used r=35 for NMF, and r=80 for SVD in order to achieve the best clustering performance. Effects of Scaling and Log transform were observed. Therefore,
 
@@ -859,24 +893,5 @@ After trying with different r-values, we used r=35 for NMF, and r=80 for SVD in 
 		\item Scale then log worsened results, but not as bad as just scaling	
  	\end{itemize}   
 \end{itemize}
-
-
-
-\begin{figure}
-  \includegraphics[width=\linewidth]{p5_svd_clustering.png} 
-  \vspace*{-20mm}
-  \caption{Clustering result for SVD with logarithmic transformation followed by unit variance}
-  \label{fig:svd3}
-\end{figure}
-
-\\
-
-\begin{figure}
-  \includegraphics[width=\linewidth]{p5_nmf_clustering.png} 
-  \vspace*{-20mm}
-  \caption{Clustering result for NMF with logarithmic transformation followed by unit variance}
-  \label{fig:nmf6}
-\end{figure}
-
 
 \end{document}
